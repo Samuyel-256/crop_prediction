@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crop Prediction</title>
+<style>
+    .Body {
+        background-size: cover;
+        background-position: center; 
+        font-family: Arial, sans-serif;
+    } 
+    .video-background {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100;
+    }
+    .container {
+        width: 25vw;
+        height: 100vh;
+        margin: auto;
+        padding: 20px;
+        background-color: rgba(80, 82, 82, 0.001); 
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(156, 53, 53, 0.1);
+        margin-top: 50px;  
+        position:fixed;
+        top: -88px;
+        left: 35%;
+    }
+    h1 {
+        text-align: center;
+        color: rgb(232, 236, 232);
+        font-family:'Russo One';
+        font-size: 2.6vw;
+    }  
+    .input-group {
+        margin-bottom: 10px;
+    }   
+    .input-group label {
+        display: block;
+        margin-bottom: 10px;
+        color: rgba(232, 234, 227, 0.934);
+        font-size: 3vh;
+        background-color: rgba(80, 82, 82, 0.1); 
+        box-shadow: 0 0 10px rgba(156, 53, 53, 0.1);
+    }
+    .input-group ::placeholder{
+        color: rgb(68, 70, 69);
+        font-size: 20px;
+    }
+    .input-group input {
+        width: calc(100% - 22px); /* Adjust the width of the input box */
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: calc(100% - 16px);
+    }
+    .input-group button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .input-group button:hover {
+        background-color: #a4c349;
+    }
+    .project-name {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        color: white;
+        font-size: 20px;
+        z-index: 100;
+    }
+    .project-name span {
+        display: block;
+    }
+    .top-left-buttons {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 100;
+    }
+    .top-left-buttons a {
+        margin-right: 10px;
+        background-color: #c6d26a;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .top-left-buttons a:hover {
+        background-color: #9aa765;
+    }
+    /* Hide the contact and predict sections by default */
+    #contact-form, #predict, #history {
+        display: none;
+    }
+    /* Show the contact section when the target of the URL is #contact */
+    #contact-form:target {
+        display: block;
+    }
+    /* Show the predict section when the target of the URL is #predict */
+    #predict:target {
+        display: block;
+    }
+    /* Show the search history section when the target of the URL is #history */
+    #history:target {
+        display: block;
+    }
+</style>
+</head>
+<body class="Body">
+    <div class="top-left-buttons">
+        <a href="/about">About</a>
+        <a href="/contact">Contact Us</a>
+        <a href="#predict">Predict</a>
+        <!-- <a href="#history">Search History</a> -->
+    </div>
+    <div class="project-name">
+        <!-- <span>Project by samuyel</span> -->
+        <!-- <span>KIET CSM</span> -->
+    </div> <!-- Project Name -->
+    <video playsinline autoplay muted loop class="video-background">
+        <source src="/static/crop.mp4" type="video/mp4">
+    </video>  
+    <div class="container" id="about">   
+        <h1>CROP PREDICTION</h1>
+    </div>
+     <!-- <div id="contact-form">
+        <div class="container">   
+            <h1>.          .</h1>
+            <form method="post">
+                <div class="input-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="input-group">
+                    <label for="problem">Problem:</label>
+                    <textarea id="problem" name="problem" placeholder="Describe your problem" required></textarea>
+                </div>
+                <div class="input-group">
+                    <button type="submit">Send</button>
+                </div>
+            </form>
+        </div>
+    </div> -->
+    <div id="predict">
+        <div class="container">   
+            <h1>CROP PREDICTION</h1>
+             <form method="post" action="/predictor"> 
+                <div class="input-group">
+                    <label for="phosphorus">Phosphorus:</label>
+                    <input type="number" id="phosphorus" name="phosphorus" placeholder="Enter phosphorus value" required>
+                </div>
+                <div class="input-group">
+                    <label for="potassium">Potassium:</label>
+                    <input type="number" id="potassium" name="potassium" placeholder="Enter potassium value" required>
+                </div>
+                <div class="input-group">
+                    <label for="nitrogen">Nitrogen:</label>
+                    <input type="number" id="nitrogen" name="nitrogen" placeholder="Enter nitrogen value" required>
+                </div>
+                <div class="input-group">
+                    <label for="rainfall">Rainfall:</label>
+                    <input type="number" id="rainfall" name="rainfall" placeholder="Enter rainfall value" required>
+                </div>
+                <div class="input-group">
+                    <label for="humidity">Humidity:</label>
+                    <input type="number" id="humidity" name="humidity" placeholder="Enter humidity value" required>
+                </div>
+                <div class="input-group">
+                    <label for="temperature">Temperature:</label>
+                    <input type="number" id="temperature" name="temperature" placeholder="Enter temperature value" required>
+                </div>
+                <div class="input-group">
+                    <label for="ph">pH:</label>
+                    <input type="number" id="ph" name="ph" placeholder="Enter pH value" required>
+                </div>
+                <div class="input-group">
+                    <button type="submit">Predictor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    <!-- <div id="history">
+        <div class="container">   
+            <h1>.         .</h1>
+            <ul>
+                {% for output in outputs %}
+                    <li>{{ output }}</li>
+                {% endfor %} 
+            </ul>
+        </div>
+    </div>
+</body>
+</html> -->
